@@ -65,6 +65,7 @@ ament_target_dependencies(robot_bringup
     finenav_engine
     finenav_route_planner
     finenav_mppi_controller
+    finenav_map_occupancy_grid_2d
     finenav_map_temporal_voxel_map
     finenav_map_terrain_analysis
     finenav_collision_model

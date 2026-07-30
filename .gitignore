@@ -73,6 +73,7 @@ CMakeUserPresets.json
 
 # CLion
 .idea/
+cmake-build-debug/
 
 # VSCode
 .vscode/
