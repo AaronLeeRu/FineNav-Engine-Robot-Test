@@ -1,36 +1,46 @@
-# Prerequisites
+#################################
+# ROS2 / Colcon
+#################################
+
+# ROS2 build files
+build/
+install/
+log/
+
+# Colcon metadata
+.colcon/
+
+#################################
+# C++ Compiled files
+#################################
+
+# Dependency files
 *.d
 
-# Compiled Object files
+# Object files
 *.slo
 *.lo
 *.o
 *.obj
 
-# Precompiled Headers
+# Precompiled headers
 *.gch
 *.pch
 
 # Linker files
 *.ilk
 
-# Debugger Files
+# Debug information
 *.pdb
+*.dwo
 
-# Compiled Dynamic libraries
+# Dynamic libraries
 *.so
+*.so.*
 *.dylib
 *.dll
-*.so.*
 
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+# Static libraries
 *.a
 *.lib
 
@@ -39,31 +49,81 @@
 *.out
 *.app
 
-# Build directories
-build/
-Build/
-build-*/
 
-# CMake generated files
+#################################
+# CMake
+#################################
+
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
 install_manifest.txt
+
+# CMake compile database
 compile_commands.json
 
-# Temporary files
-*.tmp
+# CMake user presets
+CMakeUserPresets.json
+
+
+#################################
+# IDE
+#################################
+
+# CLion
+.idea/
+
+# VSCode
+.vscode/
+
+
+#################################
+# Python
+#################################
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+
+
+#################################
+# Logs / Temporary files
+#################################
+
 *.log
+*.tmp
 *.bak
 *.swp
+
+.cache/
+Testing/
+
+
+#################################
+# ROS specific
+#################################
+
+# ROS bag files (如果你录雷达数据)
+*.bag
+*.db3
+
+# RViz config (如果不想上传个人配置)
+*.rviz
+*.rviz2
+
+
+#################################
+# Third-party dependencies
+#################################
 
 # vcpkg
 vcpkg_installed/
 
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
+# External build
+third_party/build/
