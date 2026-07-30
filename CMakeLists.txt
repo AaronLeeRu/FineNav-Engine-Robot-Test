@@ -51,10 +51,15 @@ find_library(FINENAV_ROUTE_PLANNER_LIB finenav_route_planner_lib
     PATHS "${finenav_route_planner_DIR}/../../../lib"
     NO_DEFAULT_PATH)
 
+find_library(FINENAV_OCCUPANCY_GRID_2D_LIB finenav_map_occupancy_grid_2d
+    PATHS "${finenav_map_occupancy_grid_2d_DIR}/../../../lib"
+    NO_DEFAULT_PATH)
+
 add_executable(robot_bringup src/robot_bringup_main.cpp)
 target_link_libraries(robot_bringup
     robot_map_views
     ${FINENAV_ROUTE_PLANNER_LIB}
+    ${FINENAV_OCCUPANCY_GRID_2D_LIB}
     Eigen3::Eigen
     ${PCL_LIBRARIES}
 )
@@ -98,6 +103,7 @@ install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 add_executable(test_temporal_voxel src/test_temporal_voxel.cpp)
 target_link_libraries(test_temporal_voxel
     robot_map_views
+    ${FINENAV_OCCUPANCY_GRID_2D_LIB}
     Eigen3::Eigen
     ${PCL_LIBRARIES}
 )
