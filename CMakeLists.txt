@@ -37,29 +37,29 @@ ament_target_dependencies(robot_map_views
     finenav_mppi_controller
 )
 # finenav_route_planner uses scoped headers; ensure the scoped include dir is found.
-# (ament_target_dependencies may not propagate the scoped path for old-style library exports.)
 set(_rte_scoped_inc "${finenav_route_planner_DIR}/../../../include/finenav_route_planner")
 if(IS_DIRECTORY "${_rte_scoped_inc}")
     target_include_directories(robot_map_views SYSTEM PUBLIC "${_rte_scoped_inc}")
 endif()
 unset(_rte_scoped_inc)
-target_link_libraries(robot_map_views Eigen3::Eigen ${PCL_LIBRARIES})
+target_link_libraries(robot_map_views
+    finenav_map_occupancy_grid_2d::finenav_map_occupancy_grid_2d
+    Eigen3::Eigen
+    ${PCL_LIBRARIES}
+)
 
 # ── Bringup executable ─────────────────────────────────────────────────────
 
+# finenav_route_planner uses old-style library export (no CMake target), need find_library
 find_library(FINENAV_ROUTE_PLANNER_LIB finenav_route_planner_lib
     PATHS "${finenav_route_planner_DIR}/../../../lib"
-    NO_DEFAULT_PATH)
-
-find_library(FINENAV_OCCUPANCY_GRID_2D_LIB finenav_map_occupancy_grid_2d
-    PATHS "${finenav_map_occupancy_grid_2d_DIR}/../../../lib"
     NO_DEFAULT_PATH)
 
 add_executable(robot_bringup src/robot_bringup_main.cpp)
 target_link_libraries(robot_bringup
     robot_map_views
+    finenav_map_occupancy_grid_2d::finenav_map_occupancy_grid_2d
     ${FINENAV_ROUTE_PLANNER_LIB}
-    ${FINENAV_OCCUPANCY_GRID_2D_LIB}
     Eigen3::Eigen
     ${PCL_LIBRARIES}
 )
@@ -103,7 +103,7 @@ install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 add_executable(test_temporal_voxel src/test_temporal_voxel.cpp)
 target_link_libraries(test_temporal_voxel
     robot_map_views
-    ${FINENAV_OCCUPANCY_GRID_2D_LIB}
+    finenav_map_occupancy_grid_2d::finenav_map_occupancy_grid_2d
     Eigen3::Eigen
     ${PCL_LIBRARIES}
 )
