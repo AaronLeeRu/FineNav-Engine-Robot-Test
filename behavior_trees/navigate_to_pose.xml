@@ -1,0 +1,62 @@
+<!--
+  FineNav Robot Bringup — Behaviour Tree.
+
+  This is a copy of the built-in NavigateToPose tree from finenav_navigator.
+  It uses layer="mppi_layer" and planner_id="finenav_mppi_controller",
+  which matches the pipeline assembled in robot_bringup_main.cpp.
+
+  The route planner (AstarPathSearch) is triggered automatically upstream
+  when ComputePlan calls the MPPI layer, so the BT only directly references
+  the final tracking layer.
+  -->
+<root BTCPP_format="4">
+
+    <!-- 基础导航：持续追踪，到达目标后发布零速并成功退出 -->
+    <BehaviorTree ID="RobotNavigateToPose">
+        <RetryUntilSuccessful num_attempts="-1">
+            <Sequence name="TrackThenStop">
+                <ReactiveFallback name="NavigateOrSucceed">
+                    <IsGoalReached  robot_pose="{robot_pose}"
+                                    robot_twist="{robot_twist}"
+                                    goal="{goal}"
+                                    xy_tolerance="0.25"
+                                    yaw_tolerance="1.57"
+                                    speed_tolerance="0.1"/>
+                    <ComputePlan    layer="mppi_layer"
+                                    goal="{goal}"
+                                    planner_id="finenav_mppi_controller"/>
+                </ReactiveFallback>
+                <!-- ReactiveFallback 返回 SUCCESS（IsGoalReached触发）后，发布零速 -->
+                <StopChassisMotion/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>
+
+    <!-- 带卡死检测的导航：卡死时发布零速后整棵树 FAILURE -->
+    <BehaviorTree ID="NavigateWithStuckDetection">
+        <RetryUntilSuccessful num_attempts="-1">
+            <Sequence name="TrackThenStop">
+                <ReactiveFallback name="NavigateOrSucceed">
+                    <IsGoalReached  robot_pose="{robot_pose}"
+                                    robot_twist="{robot_twist}"
+                                    goal="{goal}"
+                                    xy_tolerance="0.25"
+                                    yaw_tolerance="1.57"
+                                    speed_tolerance="0.1"/>
+                    <ReactiveSequence name="TrackUnlessStuck">
+                        <Inverter>
+                            <IsStuck robot_pose="{robot_pose}"
+                                     dist_threshold="0.05"
+                                     timeout_s="5.0"/>
+                        </Inverter>
+                        <ComputePlan layer="mppi_layer"
+                                     goal="{goal}"
+                                     planner_id="finenav_mppi_controller"/>
+                    </ReactiveSequence>
+                </ReactiveFallback>
+                <StopChassisMotion/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>
+
+</root>

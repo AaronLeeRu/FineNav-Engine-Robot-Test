@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>finenav_robot_bringup</name>
+  <version>0.1.0</version>
+  <description>FineNav-Engine real-robot bringup: assembles OccupancyGrid2D + TemporalVoxelMap + AstarPathSearch + MPPIController for live navigation testing.</description>
+  <maintainer email="wangjinghui@sjtu.edu.cn">Jinghui Wang</maintainer>
+  <license>MPL-2.0</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <depend>finenav_engine</depend>
+  <depend>finenav_core</depend>
+  <depend>finenav_map_occupancy_grid_2d</depend>
+  <depend>finenav_map_temporal_voxel_map</depend>
+  <depend>finenav_map_terrain_analysis</depend>
+  <depend>finenav_collision_model</depend>
+  <depend>finenav_route_planner</depend>
+  <depend>finenav_mppi_controller</depend>
+  <depend>finenav_util</depend>
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>eigen</depend>
+  <depend>pcl</depend>
+  <depend>pcl_conversions</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
