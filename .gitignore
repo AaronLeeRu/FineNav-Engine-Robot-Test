@@ -1,0 +1,129 @@
+#################################
+# ROS2 / Colcon
+#################################
+
+# ROS2 build files
+build/
+install/
+log/
+
+# Colcon metadata
+.colcon/
+
+#################################
+# C++ Compiled files
+#################################
+
+# Dependency files
+*.d
+
+# Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Linker files
+*.ilk
+
+# Debug information
+*.pdb
+*.dwo
+
+# Dynamic libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# Static libraries
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+#################################
+# CMake
+#################################
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+install_manifest.txt
+
+# CMake compile database
+compile_commands.json
+
+# CMake user presets
+CMakeUserPresets.json
+
+
+#################################
+# IDE
+#################################
+
+# CLion
+.idea/
+
+# VSCode
+.vscode/
+
+
+#################################
+# Python
+#################################
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+
+
+#################################
+# Logs / Temporary files
+#################################
+
+*.log
+*.tmp
+*.bak
+*.swp
+
+.cache/
+Testing/
+
+
+#################################
+# ROS specific
+#################################
+
+# ROS bag files
+*.bag
+*.db3
+
+# RViz config
+*.rviz
+*.rviz2
+
+
+#################################
+# Third-party dependencies
+#################################
+
+# vcpkg
+vcpkg_installed/
+
+# External build
+third_party/build/
