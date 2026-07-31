@@ -43,8 +43,8 @@
   ros__parameters:
 
     # ── 绝对位姿源（PoseWithCovarianceStamped）─────────────────────────────
-    pose_topic: "/localization_pose"
-    pose_smoothing_time: 0.5       # EMA 平滑收敛时间 [s]，0.0 = 瞬跳
+    pose_topic: ""                # 空 = 禁用（Fast-LIO Odometry 自带绝对位姿，无需额外修正）
+    pose_smoothing_time: 0.5       # EMA 平滑收敛时间 [s]（pose_topic 为空时无效）
 
     # ── 初始位姿（一次性订阅，收到后自动取消）───────────────────────────
     initial_pose_topic: "/initialpose"
