@@ -92,7 +92,7 @@
 /robot_bringup/route_layer:
   ros__parameters:
     astar_planner:
-      connectivity: "N8"        # 8-connected grid search
+      connectivity: "8"          # 8-connected grid search
       heuristic: "Euclidean"
       goal_tolerance_m: 0.5
       max_iterations: 1000000
