@@ -92,7 +92,7 @@ static void test_temporal_voxel_basic() {
     Eigen::Isometry3d T_map_body = Eigen::Isometry3d::Identity();
     map.insertPointCloud(cloud, T_map_body);
 
-    // All three points are in FOV (±π/2, range 0-50) and inside window
+    // All three points are in FOV (azimuth ±π/2 in XY plane, range 0-50) and inside window
     CHECK(map.isDynamicObstacle(Position3D(2.0, 1.0, 0.3)), "dynamic obstacle at (2, 1, 0.3)");
     CHECK(map.isDynamicObstacle(Position3D(1.5, 0.5, 0.4)), "dynamic obstacle at (1.5, 0.5, 0.4)");
     CHECK(map.isDynamicObstacle(Position3D(3.0, 2.0, 0.2)), "dynamic obstacle at (3, 2, 0.2)");
