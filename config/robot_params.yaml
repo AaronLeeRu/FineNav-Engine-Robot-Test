@@ -75,8 +75,8 @@
       map_length: 30.0         # Rolling window side length (m)
       min_range: 0.3           # Min LiDAR range (m)
       max_range: 30.0          # Max LiDAR range (m)
-      min_angle: -1.047        # FOV start (rad, -π/3)
-      max_angle: 1.047         # FOV end   (rad, +π/3)
+      min_angle: 0.0            # FOV start (rad, 0 = forward)
+      max_angle: 1.047         # FOV end   (rad, π/3 ≈ 60°)
       decay_time_sec: 2.0      # Voxel lifetime outside FOV (s)
       decay_time_fov_sec: 0.25 # Voxel lifetime inside FOV (s)
 
