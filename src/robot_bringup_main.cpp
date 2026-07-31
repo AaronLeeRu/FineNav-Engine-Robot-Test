@@ -98,8 +98,9 @@ int main(int argc, char** argv) {
     auto map_sub = node->create_subscription<nav_msgs::msg::OccupancyGrid>(
         "/map",
         rclcpp::QoS(rclcpp::KeepLast(1)).transient_local().reliable(),
-        [injector = std::move(map_injector)](std::shared_ptr<nav_msgs::msg::OccupancyGrid> msg) {
-            injector(std::move(*msg), msg->header.stamp);
+        [injector = std::move(map_injector), node](std::shared_ptr<nav_msgs::msg::OccupancyGrid> msg) {
+            auto stamp = rclcpp::Time(msg->header.stamp, node->get_clock()->get_clock_type());
+            injector(std::move(*msg), stamp);
         });
 
     // 2b. Temporal dynamic obstacle map (LiDAR point cloud → rolling voxels)
@@ -128,8 +129,9 @@ int main(int argc, char** argv) {
     auto pc_sub = node->create_subscription<sensor_msgs::msg::PointCloud2>(
         pc_topic,
         rclcpp::SensorDataQoS(),
-        [injector = std::move(pc_injector)](std::shared_ptr<sensor_msgs::msg::PointCloud2> msg) {
-            injector(std::move(*msg), msg->header.stamp);
+        [injector = std::move(pc_injector), node](std::shared_ptr<sensor_msgs::msg::PointCloud2> msg) {
+            auto stamp = rclcpp::Time(msg->header.stamp, node->get_clock()->get_clock_type());
+            injector(std::move(*msg), stamp);
         });
 
     RCLCPP_INFO(node->get_logger(),
