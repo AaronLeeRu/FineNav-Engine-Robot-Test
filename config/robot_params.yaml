@@ -15,7 +15,7 @@
 /**:
   ros__parameters:
     use_sim_time: false
-    mode: "navigation"          # "localization" or "navigation"
+    mode: "localization"          # "localization" or "navigation"
     point_cloud_topic: "/cloud_registered_body"  # LiDAR point cloud for TemporalVoxelMap
 
     # ── Terrain analysis ─────────────────────────────────────────────────
@@ -43,11 +43,11 @@
   ros__parameters:
 
     # ── 绝对位姿源（PoseWithCovarianceStamped）─────────────────────────────
-    pose_topic: ""                # 空 = 禁用（Fast-LIO Odometry 自带绝对位姿，无需额外修正）
-    pose_smoothing_time: 0.5       # EMA 平滑收敛时间 [s]（pose_topic 为空时无效）
+    pose_topic: "/localization_pose"                # 空 = 禁用（Fast-LIO Odometry 自带绝对位姿，无需额外修正）
+    pose_smoothing_time: 0.0       # EMA 平滑收敛时间 [s]（pose_topic 为空时无效）
 
     # ── 初始位姿（一次性订阅，收到后自动取消）───────────────────────────
-    initial_pose_topic: "/initialpose"
+    initial_pose_topic: ""
 
     # ── 速度源（TwistWithCovarianceStamped）────────────────────────────────
     twist_topic: ""                # 空 = 禁用
@@ -59,8 +59,8 @@
     odom_use_twist: true
 
     # ── 输出 ──────────────────────────────────────────────────────────────
-    force_2d_mode: true            # z/roll/pitch 输出前清零
-    publish_tf: true               # 广播 map → base_link
+    force_2d_mode: false            # z/roll/pitch 输出前清零
+    publish_tf: false               # 广播 map → base_link
     publish_odom: true             # 发布 ~/nav_state (nav_msgs/Odometry)
 
 # ── Temporal Voxel Map (dynamic obstacle layer from LiDAR) ─────────────────
